@@ -1,0 +1,99 @@
+<ng-container *ngIf="orders.length != 0">
+  <div class="container mt-5">
+    <div class="content">
+        <div class="row justify-content-center">
+            <h4 style="text-align:center;">Order History</h4>
+            
+            <div class="col-12 clearButton">
+              <button type="button" (click)="removeAllTutorials()" style="width: 100px;" class="btn btn-secondary  btn-sm n" >Clear History</button>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12" *ngFor="let ord of orders">
+              <div class="card card-desc" style="margin-bottom: 20px;">
+                <div class="card-body ">
+                  
+                  <div class="row"style="margin-left:2px;">
+                    <div class="col-8"><p>Order Date: </p></div>
+                    <div class="col-4"><p>{{ord.orderdate | date:'dd-MMM-YYYY'}} </p>
+                    </div>
+                    <div></div>
+                  </div>
+                  <div class="row"style="margin-left:2px;">
+                    <div class="col-3">
+                      <div class="images">
+                        <img src="{{ord.image}}" height="100" width="80">
+                      </div>
+                    </div>
+                    <div class="col-5">
+                      <div class="item-name">
+                          <p class="card-category">{{ord.prod_name}}</p>
+                      </div>
+                  </div>
+                  </div> 
+                  <div class="row" style="margin-left:2px;"> 
+                    <div class="col-8"><p>Quantity: </p></div>
+                    <div class="col-4"><p>{{ord.quantity}}</p></div>
+                  </div>
+                  <div class="row" style="margin-left:2px;"> 
+                    <div class="col-8"><p>Delivery </p></div>
+                    <div class="col-4"><p>R  {{ord.delivery_price}}</p></div>
+                  </div>
+                  <div class="row" style="margin-left:2px;"> 
+                    <div class="col-8"><strong><p>Order Total: </p></strong></div>
+                    <div class="col-4"><strong><p>R {{ord.totalcost}}</p></strong></div>
+                  </div>
+                  <hr>
+                  <p style="margin-left:5px;">Shipping Address</p>
+                  <div class="col-5"style="margin-left:10px;">
+                    <div class="item-name">
+                        <p class="card-category">{{ord.address}}</p>
+                    </div>
+        
+                    <div class="item-name">
+                      <p class="card-category">{{ord.city}}</p>
+                    </div>
+                    <div class="item-name">
+                      <p class="card-category">{{ord.town}}</p>
+                    </div>
+                    <div class="item-name">
+                      <p class="card-category">{{ord.zip}}</p>
+                    </div>
+                  </div>       
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <span ngxScrollTop>
+      <a routerLink="/orders"  class="back-to-top d-flex align-items-center justify-content-center active"  ><i class="fa-solid fa-arrow-up"></i></a>
+    </span>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="orders.length == 0">
+  <div class="container">
+      <div class="card empty" >
+          <h4 class="card-title">Order history</h4>
+      </div>
+
+      <div class="center">
+          <img src="https://shopfront.takealot.com/static/media/empty-order-icon-6bcc4601443c5d44b8ae3e5317d1e262.svg" alt="">
+          <h5>Your Order history is empty</h5>
+          <div class="col">
+            <button type="button" class="btn btn-secondary  btn-sm n" routerLink="/products">Start Shopping</button>
+          </div>
+            <!-- <button routerLink="/products" routerLinkActive="router-link-active"  class="btn-shop">Shop Now</button> -->
+      </div>
+  </div>
+</ng-container>
+
+<ngx-loading
+[show]="loading"
+[config]="{
+  animationType: ngxLoadingAnimationTypes.circleSwish,
+  primaryColour: '#ffffff', secondaryColour: '#ffffff',
+  backdropBorderRadius: '3px'
+}">
+</ngx-loading>
+  

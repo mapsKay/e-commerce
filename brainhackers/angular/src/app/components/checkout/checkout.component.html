@@ -1,0 +1,94 @@
+
+<section class=" gradient-custom">
+    <div class="container ">
+        <div class="row justify-content-center align-items-center ">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;" >
+                    <div class="card-body p-4 p-md-5">
+                        <div class="text-center">
+                            <h1 class="text-center text-dark mt-2 mb-3">DELIVERY ADDRESS!</h1>
+                        </div>
+                        <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+                            <div class="form-group col mb-4">
+                                <label>Address</label>
+                                <input type="text" formControlName="address" placeholder="2 Orlando west" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['address'].errors }"/>
+                                <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['address'].errors['required']">Address is required</div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col mb-4">
+                                <label>Area</label>
+                                <input type="text" (keypress)="keyPressAlphanumeric($event)" formControlName="city" placeholder="Soweto" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['city'].errors }"/>
+                                <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['city'].errors['required']">Area is required</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-8 mb-4">
+                                    <label>Town</label>
+                                    <input type="text" (keypress)="keyPressAlphanumeric($event)" formControlName="town" placeholder="Johanneburg" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['town'].errors }"/>
+                                    <div *ngIf="submitted && f['town'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['town'].errors['required']">Town is required</div>
+                                    </div>
+                                </div>
+            
+                                <div class="form-group col-md-4 mb-4">
+                                    <label>Postal Code</label>
+                                    <input type="number" formControlName="zip" placeholder="0000" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['zip'].errors }"/>
+                                    <div *ngIf="submitted && f['zip'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['zip'].errors['required']">Postal code is required</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="amounts mb-4"> 
+                                <div class="row">
+                                    <div class="col-8"><p>AMOUNT:</p></div>
+                                    <div class="col-4"><h5 style="font-size: 1.2em;">R {{ totalDue | number:'3.1-2' }} </h5></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-8"><p>Delivery Cost : </p></div>
+                                    <div class="col-4"><h5 style="font-size: 1.2em;">R {{ delivery | number:'3.1-2' }}</h5></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-8"><p>TOTAL DUE:</p></div>
+                                    <div class="col-4"><h5 style="font-size: 1.2em;">R {{ amountDelivery | number:'3.1-2' }}</h5></div>
+                                </div>
+                            </div>
+                            <div class="div class"><p>Delivery cost is calculated at 10% of the actual bill if the total cost exceed R4000, which is paid on delivery</p></div>
+                            <div class="div class"><p>Delivery cost is R0 if the actual bill the amount is less than R4000</p></div>
+                            <div class="form-group mt-3">
+                                <div class="row">
+                                    <div class="col btn1">
+                                        <button type="submit" routerLink="/products" class="btn btn-secondary btn-sm n" (click)="loading = !loading">Continue shopping</button>
+                                    </div>
+                                    <div class="col btn1">
+                                        <button type="submit" (click)="cancelForm()" class="btn btn-secondary btn-sm n" (click)="loading = !loading">Cancel Order</button>
+                                    </div>
+                                    <div class="col btn2">
+                                        <button type="submit" (ngSubmit)="onSubmit()" class="btn btn-secondary btn-sm n" (click)="loading = !loading">Place Order</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ngx-loading
+        [show]="loading"
+        [config]="{
+          animationType: ngxLoadingAnimationTypes.circleSwish,
+          primaryColour: '#ffffff', secondaryColour: '#ffffff',
+          backdropBorderRadius: '3px'
+        }">
+        </ngx-loading>
+  
+    </div>
+ </section> 
+

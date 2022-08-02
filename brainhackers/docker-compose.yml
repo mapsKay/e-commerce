@@ -1,0 +1,14 @@
+version: '4'
+services:
+    playground-web-frontend:
+      build: ./angular/
+      environment:
+        PORT: 4300
+      ports:
+        - 4300:4301
+    playground-web-backend:
+      build: ./node/
+      environment:
+        PORT: 4301
+      ports:
+        - 4300:4301
